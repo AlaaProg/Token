@@ -12,4 +12,4 @@
 
 
 ```
-#### expire to 60s \*_\* 
+#### expired after 60 sec \*_\* 
