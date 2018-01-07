@@ -9,8 +9,7 @@ import time
 
 class Token:
 
-	# expire Token : 60s
-	# length Token : (50 , 80) 
+	# expire Token : 60s 
 	# function     : @dump   , @load
 	# @dump        : take ( text )  lik mail,username,passowrd  return str( Token ) 
 	# @load        : take ( Token ) return ( Text For the Token ) 
