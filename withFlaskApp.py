@@ -8,8 +8,8 @@ app = Flask(__name__)
 
 app.config['MAIL_SERVER']   ='smtp.gmail.com'
 app.config['MAIL_PORT']     = 465
-app.config['MAIL_USERNAME'] = ''
-app.config['MAIL_PASSWORD'] = ''
+app.config['MAIL_USERNAME'] = 'YourMail@gmail.com'
+app.config['MAIL_PASSWORD'] = 'PassWordEmail'
 app.config['MAIL_USE_TLS']  = False
 app.config['MAIL_USE_SSL']  = True
 
@@ -33,12 +33,12 @@ def SendMail():
 
 		sendto = request.form["email"]
 		msg = Message(
-					"alaa aqeel",
-					sender=str(app.config['MAIL_USERNAME']),
-					recipients=[sendto],
-					body="Hello Boy"
+				"by: alaa aqeel",
+				sender=str(app.config['MAIL_USERNAME']),
+				recipients=[sendto],
+				body="Hello Boy"
 					
-				)  
+			)  
 		msg.html="<a href='http://127.0.0.1:5000/%s'>Clik her </a>"%token.dump(sendto)      
 
 		mail.send(msg)
