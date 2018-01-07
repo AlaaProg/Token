@@ -23,14 +23,22 @@ class Token:
 		# Time 
 		self.t = time.strftime("%H:%M:%S",time.localtime())
 
+	def uptime(self):
+		self.t = time.strftime("%H:%M:%S",time.localtime())
+
+	def upJson(self):
+		self.token_file = open("token.json","r").read()
 
 	def dump(self,db):
+		self.upJson()
+		self.uptime()
+
 		tk       = {}
 
 		# ENCODE 
 		dbt      = hashlib.md5(hashlib.sha224(db.encode("u8")).digest()).digest()
 		urange   = binascii.b2a_base64(os.urandom(random.randint(20,50))+dbt).strip(b"\n")
-		token    = str(urange.decode("u8"))
+		token    = hashlib.md5(urange).hexdigest()
 
 		# Time Create Token 
 		time_crate     = self.t.split(":")
@@ -55,6 +63,9 @@ class Token:
 
 	def load(self,token):
 		# IF file.json is empty
+		self.upJson()
+		self.uptime()
+
 		if self.token_file != "":
 			# get From JSON 
 			tk = json.loads(self.token_file)
@@ -67,7 +78,9 @@ class Token:
 					del tk[token]
 					open("token.json","w").write(json.dumps(tk,indent=4))
 
-					return "This Token del "
+					return None
 
 				return tkg[0]
+
+			return tkg
 
